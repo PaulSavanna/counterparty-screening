@@ -25,7 +25,7 @@ def ensure_database_path(database_url: str) -> None:
     if not database_url.startswith("sqlite"):
         return
 
-    database_target = database_url.removeprefix("sqlite:///")
+    database_target = database_url.split(":///", 1)[-1] if ":///" in database_url else ""
     if database_target == ":memory:" or database_target.startswith("file:"):
         return
 
